@@ -21,8 +21,7 @@ jobs:
                 cache-downloads: true
                 cache-env: true
                 environment-name: course
-                environment-file: text-example/conda-environment.yaml # SLim down your environment 
-            
+                environment-file: test-example/conda-environment.yaml # SLim down your environment 
             - run: |
                 micromamba activate course
                 pip install -U pytest
