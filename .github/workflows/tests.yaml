@@ -1,0 +1,43 @@
+name: "Unit and Smoke test - mamba"
+
+on:
+    workflow_dispatch:
+
+defaults:
+    run:
+        shell: bash -el {0}
+
+        
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Copy repository Contents
+              uses: actions/checkout@main
+
+            - name: Install conda environemnt
+              uses: mamba-org/provision-with-micromamba@main # v14
+              with:
+                cache-downloads: true
+                cache-env: true
+                environment-name: course
+                environment-file: text-example/conda-environment.yaml # SLim down your environment 
+            
+            - run: |
+                micromamba activate course
+                pip install -U pytest
+                pytest test-example/
+              env:
+                WANDB_API_KEY: ${{ secrets.WANDB_API_KEY}}
+
+
+                
+
+            
+        
+            
+                    
+
+
+
+
